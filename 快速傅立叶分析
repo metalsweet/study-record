@@ -1,0 +1,22 @@
+x=np.linspace(0,1,1400) *波的范围控制在20个周期左右*
+y= 3* np.sin(86*2*np.pi*x+3)+4* np.sin(210*2*np.pi*x)+6* np.sin(600*2*np.pi*x)
+yy= np.fft.fft(y)
+yf=abs(yy)
+yf1=yf/len(x)
+yf2 = yf1[range(int(len(x)/2))]
+xf = np.arange(len(y))  
+xf2 = xf[range(int(len(x)/2))]
+plt.plot(xf2,yf2) 
+
+from scipy.optimize import curve_fit
+def function(x, a , b, f1, f2):
+    result = a * np.sin(f1*np.pi*x)+b* np.sin(f2*np.pi*x)
+    return result
+x = np.linspace(0, 10, 1000)
+actual_parameters = [3, 2, 2, 8]
+y = function(x, *actual_parameters)
+p = plt.plot(x,y)
+p_est, err_est = curve_fit(function, x, y_noisy)
+print (p_est)
+p = plt.plot(x, y_noisy, "rx")
+p = plt.plot(x, function(x, *p_est), "k--")
