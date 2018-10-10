@@ -1,0 +1,35 @@
+plt.subplot(121)
+plt.plot(t1, f(t1), 'o', t2, f(t2), '-')
+plt.title('subplot 1')
+plt.ylabel('Damped oscillation')
+plt.suptitle('This is a somewhat long figure title', fontsize=16)
+plt.text(2,0.6 ,"youbang" ,fontsize=50, color='gray',alpha=0.3)
+plt.xticks(ind, ('G1', 'G2', 'G3', 'G4', 'G5'))
+plt.yticks(np.arange(0, 81, 10))
+plt.ylim(-2,2)
+plt.subplot(122)
+plt.plot(t3, np.cos(2*np.pi*t3), '--')
+plt.xlabel('time (s)')
+plt.title('subplot 2')
+plt.ylabel('Undamped')
+t= np.arange(0, 20, 0.1)
+t1=np.arange(2, 19, 0.5)
+plt.ylim(-2,2)
+plt.plot(t1, np.cos(t1-np.pi/2),'o',)
+plt.plot(t,np.cos(t-np.pi/2),'g')
+plt.quiver(t1, np.cos(t1-np.pi/2),0 ,np.cos(t1), color='r',alpha=0.5,pivot='tail', width=0.005,scale=8)
+plt.legend(('q=10', 'q=5', 'q=3','q=2.5', 'q=2', 'q=1.25',),
+           loc='upper right')
+
+plt.violinplot(all_data,showmeans=False,showmedians=True)
+plt.boxplot
+plt.hist(x, 50(柱数), normed=1(是否将得到的直方图向量归一化。默认为0), facecolor='g', alpha=0.75)
+plt.annotate('local max', xy(箭头位置)=(2, 1), xytext（文字位置）=(3, 1.5),arrowprops=dict(facecolor='black', shrink=0.05),)
+plt.bar(ind, womenMeans, width,facecolor = 'r',bottom=menMeans, yerr=womenStd, alpha=0.3,align='center',)
+plt.bar(ind, menMeans, width,color =['b','y','g','b','k'] ,alpha=0.3,align='center',)
+X, Y = np.meshgrid(X, Y)
+plt.pcolormesh(X, Y, z,) 用颜色表示图上每一点的大小
+ax1 = Axes3D(fig)
+ax = fig.gca(projection="3d")
+ax.plot_surface(X, Y, e) 3D图
+plt.pcolormesh(X, Y, e) 2D图
