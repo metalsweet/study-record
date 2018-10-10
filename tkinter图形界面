@@ -1,0 +1,79 @@
+import tkinter
+from tkinter import *
+class WidgetsDemo:
+    def __init__(self):
+        window= Tk()    
+        window.title("测试")
+        
+        self.canvas = Canvas(window, width = 200, height = 100, bg = "White")
+        self.canvas.pack()
+        
+        frame1 = Frame(window)
+        frame1.pack(padx=8, pady=8, ipadx=4)
+        label1=Label(frame1, text="第一个数字")
+        label2=Label(frame1, text="第二个数字")
+        
+        
+        self.v1=IntVar()
+        e1 = Entry(frame1,textvariable =self.v1)
+        self.v2=IntVar()
+        e2 = Entry(frame1,textvariable =self.v2)
+        
+        label1.grid(row = 1, column = 1)
+        e1.grid(row=1, column=2)
+        label2.grid(row = 2, column = 1)
+        e2.grid(row=2, column=2)
+        
+        btGetName = Button(frame1, text = "打印", command = self.processButton)
+        btGetName.grid(row = 3, column = 1)
+        window.mainloop()
+    def processButton(self):
+        self.canvas.create_text(60, 40, text =self.v1.get()+self.v2.get(), font = "Tine 10 bold underline", tags = "string")
+WidgetsDemo()  
+
+
+
+from tkinter import *
+class WidgetsDemo:
+    def __init__(self):
+        window= Tk()    
+        window.title("鸡兔计算问题")
+
+        frame1 = Frame(window)
+        frame1.pack(padx=8, pady=8, ipadx=4)
+        label1=Label(frame1, text="请输入头的数量")
+        label2=Label(frame1, text="请输入腿的数量")
+        
+        
+        self.v1=IntVar()
+        e1 = Entry(frame1,textvariable =self.v1)
+        self.v2=IntVar()
+        e2 = Entry(frame1,textvariable =self.v2)
+        
+        self.text = Text(window)
+        self.text.pack()
+        self.text.insert(END, "计算结果是                 ")
+        label1.grid(row = 1, column = 1)
+        e1.grid(row=1, column=2)
+        label2.grid(row = 2, column = 1)
+        e2.grid(row=2, column=2)
+
+        btGetName = Button(frame1, text = "开始计算", command = self.processButton)
+        btGetName.grid(row = 3, column = 1)
+        window.mainloop()
+    def processButton(self):
+        chickhead=0
+        while chickhead<self.v1.get()+1:
+                if chickhead*2+(self.v1.get()-chickhead)*4!=self.v2.get():
+                    chickhead=chickhead+1
+                    pass
+                else:
+                    self.text.insert(END, "鸡的数量是：")
+                    self.text.insert(END, chickhead)
+                    self.text.insert(END, "兔的数量是:")
+                    self.text.insert(END, self.v1.get()-chickhead   )
+                    break
+        if chickhead==self.v1.get()+1:
+            self.text.insert(END, "输入错误！")
+                             
+WidgetsDemo()  
