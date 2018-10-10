@@ -8,7 +8,7 @@ linalg.det(A)                    #计算行列式#
 linalg.norm(A)                 #计算矩阵或向量的模#
 linalg.eigvals(A)              #特征值和特征向量
 A2,B = np.linalg.eig(a)       # 其中A2也是特征值，B为特征向量
-linalg.svd(A)                  #奇异值分解
+linalg.svd(A)                  #奇异值分解#
 A.dot(B)                          #计算矩阵AB#
 A.dot(linalg.inv(B))           #计算矩阵A/B=A乘以B的负一次方=A乘以B的逆矩阵#
 
