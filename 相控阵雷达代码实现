@@ -1,0 +1,46 @@
+import matplotlib
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+%matplotlib qt5
+
+X = np.arange(0, 80, 0.1)
+Y = np.arange(0, 60, 0.1)
+y1=20
+y2=21
+y3=22
+y4=23
+y5=24
+y6=25
+y7=26
+y8=27
+y9=28
+y10=29
+x0=0
+X, Y = np.meshgrid(X, Y)
+l1=np.sqrt((X-x0)**2+(Y-y1)**2)
+l2=np.sqrt((X-x0)**2+(Y-y2)**2)
+l3=np.sqrt((X-x0)**2+(Y-y3)**2)
+l4=np.sqrt((X-x0)**2+(Y-y4)**2)
+l5=np.sqrt((X-x0)**2+(Y-y5)**2)
+l6=np.sqrt((X-x0)**2+(Y-y6)**2)
+l7=np.sqrt((X-x0)**2+(Y-y7)**2)
+l8=np.sqrt((X-x0)**2+(Y-y8)**2)
+l9=np.sqrt((X-x0)**2+(Y-y9)**2)
+l10=np.sqrt((X-x0)**2+(Y-y10)**2)
+d=-0.5
+k=0.9
+e1=np.sin(k*l1+1*d)
+e2=np.sin(k*l2+2*d)
+e3=np.sin(k*l3+3*d)
+e4=np.sin(k*l4+4*d)
+e5=np.sin(k*l5+5*d)
+e6=np.sin(k*l6+6*d)
+e7=np.sin(k*l7+7*d)
+e8=np.sin(k*l8+8*d)
+e9=np.sin(k*l9+9*d)
+e10=np.sin(k*l10+10*d)
+z=e1+e2+e3+e4+e5+e6+e7+e8+e9+e10
+plt.annotate('local max', xy=(0, 25),arrowprops=dict(facecolor='black', shrink=0.1),)
+plt.pcolormesh(X, Y, z,shading='gouraud')
