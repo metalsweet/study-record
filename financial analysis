@@ -1,3 +1,13 @@
 pip install tushare
 https://www.cnblogs.com/DreamRJF/p/8660630.html
 https://tushare.pro/document/2?doc_id=25
+
+
+data=ts.get_hist_data('000938',start='2018-08-01',end='2018-10-01')
+data.columns
+data.drop(['open', 'high', 'low',],axis=1)#f\放弃的columns#
+data=pd.DataFrame(data,columns=['price_change', 'p_change'],index=[])#选取特定的columns和index#
+data=data[['price_change', 'p_change']]#选取特定的columns#
+data[data['price_change']>0]#只显示['price_change']>0的项#
+data.price_change>0 #显示['price_change']>0的布尔值#
+data['price_change']>0#显示['price_change']>0的布尔值#
