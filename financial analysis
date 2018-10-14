@@ -1,6 +1,9 @@
 pip install tushare
 https://www.cnblogs.com/DreamRJF/p/8660630.html
 https://tushare.pro/document/2?doc_id=25
+机器学习之正则化（Regularization）
+http://www.cnblogs.com/jianxinzhou/p/4083921.html
+https://www.zhihu.com/question/20924039
 
 
 data=ts.get_hist_data('000938',start='2018-08-01',end='2018-10-01')
