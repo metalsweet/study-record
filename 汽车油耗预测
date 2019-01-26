@@ -66,4 +66,5 @@ history = model.fit(normed_train_data, train_labels, epochs=EPOCHS,
 
 plot_history(history)
 
+normed_test_data= norm(datatest)  #标准化测试数据#
 test_predictions = model.predict(normed_test_data).flatten()
