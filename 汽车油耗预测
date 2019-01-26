@@ -4,6 +4,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight',
                 'Acceleration', 'Model Year', 'Origin']
@@ -23,7 +24,7 @@ dataset['Japan'] = (dataset['Origin'] == 3)*1.0
 dataset.tail()
 
 datatrain= dataset.sample(frac=0.85,random_state=0)#数据分割成训练集和测试集#
-test_dataset = dataset.drop(data.train.index)
+test_dataset = dataset.drop(datatrain.index)
 datatest=test_dataset[['Cylinders','Displacement','Horsepower','Weight','Acceleration','Model Year','USA','Europe','Japan']]
 labeltest=test_dataset['MPG']#测试集数据和标签#
 
@@ -34,14 +35,14 @@ train_stats = datauseful.describe()
 train_stats = train_stats.transpose()  #计算总样本标准差和平均值，翻转方便下一步处理#
 def norm(x):
   return (x - train_stats['mean']) / train_stats['std'] #数据预处理，减小每一项的误差#
-datatrainnorm= norm(datausefull) #只标准化训练数据#
+datatrainnorm= norm(datauseful) #只标准化训练数据#
  
 #创造训练模型#
 def build_model():
   model = keras.Sequential([
-    layers.Dense(64, activation=tf.nn.relu, input_shape=[len(datatrainnorm.keys())]),
-    layers.Dense(64, activation=tf.nn.relu),
-    layers.Dense(1)
+    Dense(64, activation=tf.nn.relu, input_shape=[len(datatrainnorm.keys())]),
+    Dense(64, activation=tf.nn.relu),
+    Dense(1)
   ])
 
   optimizer = tf.keras.optimizers.RMSprop(0.001)
@@ -50,7 +51,7 @@ def build_model():
                 optimizer=optimizer,
                 metrics=['mae', 'mse'])
   return model
-  model = build_model()
+model = build_model()
   
  #创建进度条#
 class PrintDot(keras.callbacks.Callback):
@@ -61,10 +62,20 @@ EPOCHS = 1000
 
 early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
 
-history = model.fit(normed_train_data, train_labels, epochs=EPOCHS,
+history = model.fit(datatrainnorm, labeltrain, epochs=EPOCHS,
                     validation_split = 0.2, verbose=0, callbacks=[early_stop, PrintDot()])
 
-plot_history(history)
+history
 
 normed_test_data= norm(datatest)  #标准化测试数据#
 test_predictions = model.predict(normed_test_data).flatten()
+
+#可视化比较测试结果#
+plt.scatter(labeltest, test_predictions)
+plt.xlabel('True Values [MPG]')
+plt.ylabel('Predictions [MPG]')
+plt.axis('equal')
+plt.axis('square')
+plt.xlim([0,plt.xlim()[1]])
+plt.ylim([0,plt.ylim()[1]])
+_ = plt.plot([-100, 100], [-100, 100])
