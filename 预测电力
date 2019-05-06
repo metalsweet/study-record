@@ -1,0 +1,14 @@
+%matplotlib inline
+import matplotlib as mpl
+from matplotlib import pylab as plt
+import pandas as pd
+data=pd.read_csv('e:/paper/data.txt')
+import numpy as np
+data=np.array(data)
+date=pd.read_csv('e:/paper/date.txt')
+date=('2014 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','2015',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', 
+      '2016',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', '2017', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2018',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','2019', ' ','')
+n= range(len(date))
+plt.plot(data)
+plt.xticks(n, date, fontsize=9, rotation=45)
