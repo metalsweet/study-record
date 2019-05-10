@@ -1,14 +1,26 @@
-%matplotlib inline
+import matplotlib
 import matplotlib as mpl
 from matplotlib import pylab as plt
 import pandas as pd
-data=pd.read_csv('e:/paper/data.txt')
+%matplotlib qt5
+data=pd.read_csv('d:/paper/data.txt')
 import numpy as np
 data=np.array(data)
-date=pd.read_csv('e:/paper/date.txt')
-date=('2014 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','2015',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', 
-      '2016',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', '2017', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-      '2018',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','2019', ' ','')
+date=('2010 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2011 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2012 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2013 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2014 ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2015',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', 
+      '2016',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ', 
+      '2017', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+      '2018',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','
+      2019', ' ','')
 n= range(len(date))
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
 plt.plot(data)
+plt.xlabel('2010--2018')
+plt.ylabel('年份')
 plt.xticks(n, date, fontsize=9, rotation=45)
+plt.title('全社会用电量')
