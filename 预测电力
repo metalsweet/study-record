@@ -24,3 +24,56 @@ plt.xlabel('2010--2018')
 plt.ylabel('年份')
 plt.xticks(n, date, fontsize=9, rotation=45)
 plt.title('全社会用电量')
+
+#预处理数据#
+data=pd.read_csv('e:/paper/data.txt')
+import numpy as np
+data=np.array(data)
+data=data.reshape([9,12])
+traindata=data[0:8,0:6]
+traintarget=data[0:8,6:7]
+a=traindata.transpose()
+
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+#创造训练模型#
+def build_model():
+  model = keras.Sequential([
+    Dense(64, activation=tf.nn.relu, input_shape=[len(a)]),
+    Dense(64, activation=tf.nn.relu),
+    Dense(1)
+  ])
+
+  optimizer = tf.keras.optimizers.RMSprop(0.001)
+
+  model.compile(loss='mse',
+                optimizer=optimizer,
+                metrics=['mae', 'mse'])
+  return model
+model = build_model()
+  
+ #创建进度条#
+class PrintDot(keras.callbacks.Callback):
+  def on_epoch_end(self, epoch, logs):
+    if epoch % 100 == 0: print('')
+    print('.', end='')
+EPOCHS = 1000
+
+early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+
+history = model.fit(traindata,traintarget, epochs=EPOCHS,
+                    validation_split = 0.2, verbose=0, callbacks=[early_stop, PrintDot()])
+
+history
+#aug#
+traindata=data[0:8,0:6]
+traintarget=data[0:8,7:8]
+a=traindata.transpose()
+history = model.fit(traindata,traintarget, epochs=EPOCHS,
+                    validation_split = 0.2, verbose=0, callbacks=[early_stop, PrintDot()])
+
+test_predictions = model.predict(xtest).flatten()
+test_predictions
