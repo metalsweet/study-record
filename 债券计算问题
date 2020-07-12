@@ -1,0 +1,64 @@
+import numpy as np
+from tkinter import *
+class WidgetsDemo:
+    def __init__(self):
+        window= Tk()    
+        window.title("债券计算问题")
+
+        frame1 = Frame(window)
+        frame1.pack(padx=16, pady=116, ipadx=3)
+        
+        label1=Label(frame1, text="请输入买入债券的市值")
+        label2=Label(frame1, text="请输入购买年限")
+        label3=Label(frame1, text="请输入债券名义利率")
+        label4=Label(frame1, text="请输入无风险利率")
+
+
+        self.v1=DoubleVar()
+        money= Entry(frame1,textvariable =self.v1)
+        self.v2=DoubleVar()
+        years= Entry(frame1,textvariable =self.v2)
+        self.v3=DoubleVar()
+        rate1= Entry(frame1,textvariable =self.v3)
+        self.v4=DoubleVar()
+        rate2= Entry(frame1,textvariable =self.v4)
+        
+      
+        
+        label1.grid(row = 1, column = 1)
+        money.grid(row=1, column=2)
+        label2.grid(row = 1, column =3)
+        years.grid(row=1, column=4)
+        label3.grid(row = 2, column = 1)
+        rate1.grid(row=2, column=2)
+        label4.grid(row = 2, column =3)
+        rate2.grid(row=2, column=4)
+        
+        
+
+        btGetName = Button(frame1, text = "开始计算", command = self.processButton)
+        btGetName.grid(row = 3, column = 1)
+        
+        self.text = Text(window)
+        self.text.pack()
+        self.text.insert(END, "...")
+        
+       
+        window.mainloop()
+    def processButton(self):
+        yi=np.double(1)
+        n=1
+        p=self.v1.get()/(yi+0.01*self.v4.get())**self.v2.get()
+        while n<=self.v2.get():
+            p=p+self.v3.get()/((yi+0.01*self.v4.get())**n)
+            n=n+1
+        
+        self.text.delete(0.1,5.0) 
+        self.text.insert(END, "债券价格为：",)
+        self.text.insert(END, p)
+        self.text.insert(END, "未来本金的现值价值为：")
+        self.text.insert(END, self.v1.get()/(yi+0.01*self.v4.get())**self.v2.get())
+        self.text.insert(END, "本金翻倍需要的时间为：")
+        self.text.insert(END, np.log(2)/np.log(yi+0.01*self.v3.get()))
+                         
+WidgetsDemo() 
